@@ -1,0 +1,14 @@
+node {
+    stage('Git Checkout') {
+        git branch: 'main',
+            url: 'https://github.com/nagasubramanyam-hub/DevOps.git'
+    }
+
+    stage('Deploy to NGINX') {
+        bat '''
+        echo Copying files to NGINX html folder
+        robocopy . "C:\\Users\\Administrator\\Downloads\\nginx-1.28.1\\nginx-1.28.1\\html" /E
+        IF %ERRORLEVEL% LEQ 3 exit 0
+        '''
+    }
+}
